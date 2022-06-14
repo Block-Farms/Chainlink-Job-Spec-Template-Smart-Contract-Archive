@@ -1,4 +1,4 @@
-# ** Chainlink-Job-Spec-Template-Smart-Contract-Database **
+# Chainlink-Job-Spec-Template-Smart-Contract-Database
 
 ### What is a Job?
 
