@@ -17,4 +17,6 @@ Chainlink nodes require jobs to do anything useful. For example, posting asset p
 
 Jobs are represented by TOML (.toml) specifications.
 
-Reference: https://docs.chain.link/docs/jobs/
+References: [0] https://docs.chain.link/docs/jobs/
+
+[1] https://github.com/smartcontractkit/chainlink/tree/develop/core/testdata/tomlspecs
