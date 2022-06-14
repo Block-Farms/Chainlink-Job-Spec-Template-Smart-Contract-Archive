@@ -18,7 +18,7 @@ Chainlink nodes require jobs to do anything useful. For example, posting asset p
 
 Jobs are represented by TOML `.toml` specifications.
 
-References: 
+### References: 
 
   [0] https://docs.chain.link/docs/jobs/
 
