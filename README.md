@@ -3,17 +3,17 @@
 What is a Job?
 Chainlink nodes require jobs to do anything useful. For example, posting asset price data on-chain requires jobs. Chainlink nodes support the following job types:
 
-[Webhook](https://docs.chain.link/docs/jobs/types/webhook/)
+[(0) Webhook](https://docs.chain.link/docs/jobs/types/webhook/)
 
-[Direct Request](https://docs.chain.link/docs/jobs/types/direct-request/)
+[(1) Direct Request](https://docs.chain.link/docs/jobs/types/direct-request/)
 
-[Flux Monitor](https://docs.chain.link/docs/jobs/types/flux-monitor/)
+[(2) Flux Monitor](https://docs.chain.link/docs/jobs/types/flux-monitor/)
 
-[Off-chain Reporting (a.k.a. OCR)](https://docs.chain.link/docs/jobs/types/offchain-reporting/)
+[(3) Off-chain Reporting (a.k.a. OCR)](https://docs.chain.link/docs/jobs/types/offchain-reporting/)
 
-[Cron](https://docs.chain.link/docs/jobs/types/cron/)
+[(4) Cron](https://docs.chain.link/docs/jobs/types/cron/)
 
-[Keeper](https://docs.chain.link/docs/jobs/types/keeper/)
+[(5) Keeper](https://docs.chain.link/docs/jobs/types/keeper/)
 
 Jobs are represented by TOML (.toml) specifications.
 
