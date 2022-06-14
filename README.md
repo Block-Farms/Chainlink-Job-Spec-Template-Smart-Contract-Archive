@@ -1,6 +1,7 @@
-# Chainlink-Job-Spec-Template-Smart-Contract-Database
+# ** Chainlink-Job-Spec-Template-Smart-Contract-Database **
 
-What is a Job?
+### What is a Job?
+
 Chainlink nodes require jobs to do anything useful. For example, posting asset price data on-chain requires jobs. Chainlink nodes support the following job types:
 
 (0) [Webhook](https://docs.chain.link/docs/jobs/types/webhook/)
@@ -15,7 +16,7 @@ Chainlink nodes require jobs to do anything useful. For example, posting asset p
 
 (5) [Keeper](https://docs.chain.link/docs/jobs/types/keeper/)
 
-Jobs are represented by TOML (.toml) specifications.
+Jobs are represented by TOML `.toml` specifications.
 
 References: 
 
