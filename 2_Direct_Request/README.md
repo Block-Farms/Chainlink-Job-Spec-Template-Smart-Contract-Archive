@@ -29,8 +29,6 @@ To explicitly set the associated external Job-Id for the job-spec:
 
 Note: This is useful for updating a job-spec for a user without the need to change the job-id set within the requesting smart contract.
 
-
-
 To explicitly set a job-specific value for the equivalent global `.env` config within the chainlink node:
 
 ```minIncomingConfirmations = 1```
