@@ -1,0 +1,10 @@
+type            = "webhook"
+schemaVersion   = 1
+name = "[WH-username] cbor0-v0"
+observationSource   = """
+    fetch [type="http" method=GET url="https://api_endpoint.com"]
+    parse [type=jsonparse path="data,results" data="$(fetch)"]
+​    multiply  [type="multiply" input="$(parse)" times=100]
+
+    fetch -> parse -> multiply
+"""

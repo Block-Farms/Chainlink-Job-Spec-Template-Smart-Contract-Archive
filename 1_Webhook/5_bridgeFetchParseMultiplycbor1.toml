@@ -1,0 +1,10 @@
+type = "webhook"
+schemaVersion = 1
+name = "[WH-username] cbor1-v0"
+observationSource = """
+    fetch        [type=bridge name="username-cbor1-v0" requestData="{\\"id\\": $(jobSpec.externalJobID), \\"data\\": { \\"variable1\\": \\"cbor_input1\\" } }"]
+    parse        [type=jsonparse path="data,results" data="$(fetch)"]
+    multiply  [type="multiply" input="$(parse)" times=100]
+
+    fetch -> parse -> multiply
+"""
