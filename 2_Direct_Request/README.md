@@ -4,6 +4,8 @@
 
 ```evmChainID = 1```
 
+Note: Find the list of `evmChainID` compatible with a Chainlink Node [here] (https://docs.chain.link/docs/link-token-contracts/)
+
 
 (1) To add the requesting smart contracts address to the job-specs whitelist:
 
