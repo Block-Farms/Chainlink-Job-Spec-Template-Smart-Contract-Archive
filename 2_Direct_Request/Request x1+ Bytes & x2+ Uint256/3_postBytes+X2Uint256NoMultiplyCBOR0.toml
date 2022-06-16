@@ -1,0 +1,27 @@
+type = "directrequest"
+schemaVersion = 1
+name = "[DR-username] (Post > x1 Bytes, x2 Uint256 CBOR0) v0"
+maxTaskDuration = "0s"
+contractAddress = "YOUR_OPERATOR_CONTRACT_ADDRESS"
+minContractPaymentLinkJuels = 0
+minIncomingConfirmations = 0
+observationSource = """
+    decode_log   [type="ethabidecodelog"
+                  abi="OracleRequest(bytes32 indexed specId, address requester, bytes32 requestId, uint256 payment, address callbackAddr, bytes4 callbackFunctionId, uint256 cancelExpiration, uint256 dataVersion, bytes data)"
+                  data="$(jobRun.logData)"
+                  topics="$(jobRun.logTopics)"]
+
+    decode_cbor     [type="cborparse" data="$(decode_log.data)"]
+    fetch           [type=bridge name="bridge_name" requestData="{\\"id\\": $(jobSpec.externalJobID) }"]
+    parse_1         [type=jsonparse path="$(decode_cbor.path1)" data="$(fetch)"]
+    parse_2         [type=jsonparse path="$(decode_cbor.path2)" data="$(fetch)"]
+    parse_3         [type=jsonparse path="$(decode_cbor.path3)" data="$(fetch)"]
+    encode_data     [type="ethabiencode" abi="(bytes32 requestId, bytes _bytes, uint256 _number1, uint256 _number2)" data="{ \\"requestId\\": $(decode_log.requestId), \\"_bytes\\": $(parse_1), \\"_number1\\": $(parse_2), \\"_number2\\": $(parse_3)}"]
+    encode_tx       [type="ethabiencode"
+                      abi="fulfillOracleRequest2(bytes32 requestId, uint256 payment, address callbackAddress, bytes4 callbackFunctionId, uint256 expiration, bytes calldata data)"
+                      data="{\\"requestId\\": $(decode_log.requestId), \\"payment\\": $(decode_log.payment), \\"callbackAddress\\": $(decode_log.callbackAddr), \\"callbackFunctionId\\": $(decode_log.callbackFunctionId), \\"expiration\\": $(decode_log.cancelExpiration), \\"data\\": $(encode_data)}"
+                    ]
+    submit_tx    [type="ethtx" to="YOUR_OPERATOR_CONTRACT_ADDRESS" data="$(encode_tx)"]
+
+    decode_log -> decode_cbor -> fetch -> parse_1 -> parse_2 -> parse_3 -> encode_data -> encode_tx -> submit_tx
+"""
