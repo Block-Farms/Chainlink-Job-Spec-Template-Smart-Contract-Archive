@@ -1,6 +1,6 @@
 type = "directrequest"
 schemaVersion = 1
-name = "[DR-username] (Get > Uint256 cbor1 No Multiply)-v0"
+name = "[DR-username] (Post > Uint256 CBOR1 No Multiply)-v0"
 contractAddress = "YOUR_ORACLE_CONTRACT_ADDRESS"
 minContractPaymentLinkJuels = 0
 minIncomingConfirmations = 0
