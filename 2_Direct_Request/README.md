@@ -1,4 +1,4 @@
-### Optional Fields within direct request job-specs:
+### Optional Fields Within Direct Request Job-Specs:
 
 (0) To explicitly set the network of the job-spec:
 
