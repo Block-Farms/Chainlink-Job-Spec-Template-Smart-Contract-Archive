@@ -30,7 +30,7 @@ contract MultiDataTypeRequest is ChainlinkClient {
     public
   {
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillBytesAndUint.selector);
-    req.add("input", "headerInput1Value");
+    req.add("input", "inputValue");
     req.add("path1", "data,results1");
     req.add("path2", "data,results2");
     sendOperatorRequest(req, oraclePayment);
