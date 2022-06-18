@@ -28,9 +28,10 @@ contract MultiVariableRequest is ChainlinkClient, ConfirmedOwner {
     onlyOwner
   {
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillValue1AndValue2.selector);
-    req.add("input", "inputVariable1");
+    req.add("input1", "inputVariable1");
     req.add("path1", "data,results1");
     req.add("path2", "data,results2");
+    req.add("times", 100);
     sendOperatorRequest(req, oraclePayment);
   }
 
