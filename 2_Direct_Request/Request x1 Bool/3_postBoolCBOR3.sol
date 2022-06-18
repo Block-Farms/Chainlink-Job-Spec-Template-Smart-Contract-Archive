@@ -10,9 +10,10 @@ import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 contract getBoolTemplate is ChainlinkClient, ConfirmedOwner {
   using Chainlink for Chainlink.Request;
 
-  uint256 constant private ORACLE_PAYMENT = 0 * LINK_DIVISIBILITY;
   bool public boolean;
-  bytes32 private _jobId = "JOB_ID";
+  
+  bytes32 private externalJobId;
+  uint256 private oraclePayment;
 
   event RequestBoolFulfilled(
     bytes32 indexed requestId,
@@ -22,18 +23,20 @@ contract getBoolTemplate is ChainlinkClient, ConfirmedOwner {
   constructor() ConfirmedOwner(msg.sender){
   setChainlinkToken(LINK_TOKEN_ADDRESS);
   setChainlinkOracle(OPERATOR_ADDRESS);
+  externalJobId = "externalJobId";
+  oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
   function requestBool()
     public
     onlyOwner
   {
-    Chainlink.Request memory req = buildChainlinkRequest(_jobId, address(this), this.fulfillBool.selector);
+    Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillBool.selector);
     req.add("input1", "inputVariable1");
     req.add("input2", "inputVariable2");
     req.add("input3", "inputVariable3");
     req.add("path", "data,results");
-    sendChainlinkRequestTo(req, ORACLE_PAYMENT);
+    sendChainlinkRequestTo(req, oraclePayment);
   }
 
   function fulfillBool(bytes32 _requestId, bool _boolean)
