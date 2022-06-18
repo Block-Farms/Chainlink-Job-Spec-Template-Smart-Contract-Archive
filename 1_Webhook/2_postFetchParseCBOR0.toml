@@ -2,7 +2,7 @@ type            = "webhook"
 schemaVersion   = 1
 name = "[WH-username] cbor0-v0"
 observationSource   = """
-    fetch [type="bridge" name="username-v0" requestData="{ \\"variable\\": \\"0\\" }"]
+    fetch [type="bridge" name="bridge_name" requestData="{ \\"id\\": $(jobSpec.externalJobID) }"]
     parse [type=jsonparse path="data,results" data="$(fetch)"]
 
     fetch -> parse
