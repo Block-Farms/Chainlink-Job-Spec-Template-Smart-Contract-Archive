@@ -32,7 +32,7 @@ contract PriceOracle is ChainlinkClient, ConfirmedOwner {
     onlyOwner
   {
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillPrice.selector);
-    sendChainlinkRequestTo(_oracle, req, oraclePayment);
+    sendChainlinkRequestTo(req, oraclePayment);
   }
 
   function fulfillPrice(bytes32 _requestId, uint256 _price)
