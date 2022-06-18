@@ -10,28 +10,31 @@ import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 contract getUintTemplate is ChainlinkClient, ConfirmedOwner {
   using Chainlink for Chainlink.Request;
 
-  uint256 constant private ORACLE_PAYMENT = 0 * LINK_DIVISIBILITY;
   uint256 public Uint;
-  address private _oracle = ORACLE_CONTRACT_ADDRESS;
-  bytes32 private _jobId = "JOB_ID";
 
+  bytes32 private externalJobId;
+  uint256 private oraclePayment;
+  
   event RequestUintFulfilled(
     bytes32 indexed requestId,
     uint256 indexed Uint
   );
 
   constructor() ConfirmedOwner(msg.sender){
-    setPublicChainlinkToken();
+    setChainlinkToken(LINK_TOKEN_ADDRESS);
+    setChainlinkOracle(ORACLE_ADDRESS);
+    externalJobId = "externalJobId";
+    oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
   function requestUint()
     public
     onlyOwner
   {
-    Chainlink.Request memory req = buildChainlinkRequest(_jobId, address(this), this.fulfillUint.selector);
+    Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillUint.selector);
     req.add("path", "data,results");
     req.add("times", 100);
-    sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
+    sendChainlinkRequestTo(req, oraclePayment);
   }
 
   function fulfillUint(bytes32 _requestId, uint256 _Uint)
