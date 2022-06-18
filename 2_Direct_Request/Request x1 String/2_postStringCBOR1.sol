@@ -11,23 +11,25 @@ contract RequestString is ChainlinkClient {
 
   string public stringVariable;
 
-  uint256 constant private ORACLE_PAYMENT = 0 * LINK_DIVISIBILITY / 100 * 5;
+  bytes32 private externalJobId;
+  uint256 private oraclePayment;
 
   constructor(
   ) {
     setChainlinkToken(LINK_TOKEN_ADDRESS);
     setChainlinkOracle(OPERATOR_ADDRESS);
+    externalJobId = "externalJobId";
+    oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
   function requestString(
   )
     public
   {
-    bytes32 externalJobId = "job_id";
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillString.selector);
     req.add("input", "inputVariable");
     req.add("path1", "data,results");
-    sendOperatorRequest(req, ORACLE_PAYMENT);
+    sendOperatorRequest(req, oraclePayment);
   }
 
   event RequestFulfilled(
