@@ -2,7 +2,7 @@ type = "webhook"
 schemaVersion = 1
 name = "[WH-username] x5 Parse Bridge"
 observationSource = """
-  fetch        [type=bridge name="blkcipher-jp-therundown" requestData="{\\"id\\": $(jobSpec.externalJobID), \\"data\\": {\\"input1\\": \\"input1_value\\",\\"input2\\": \\"input2_value\\"},\\"debug\\": {\\"input3\\": \\"input3_value\\"} }"]
+  fetch        [type=bridge name="bridge_name" requestData="{\\"id\\": $(jobSpec.externalJobID), \\"data\\": {\\"input1\\": \\"input1_value\\",\\"input2\\": \\"input2_value\\"},\\"debug\\": {\\"input3\\": \\"input3_value\\"} }"]
   parse_1      [type=jsonparse path="data,results,output1" data="$(fetch)"]
   parse_2      [type=jsonparse path="data,results,output2" data="$(fetch)"]
   parse_3      [type=jsonparse path="data,results,output3" data="$(fetch)"]
