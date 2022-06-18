@@ -10,22 +10,25 @@ import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 contract RequestUint256Array is ChainlinkClient, ConfirmedOwner {
   using Chainlink for Chainlink.Request;
 
-  uint256 constant private ORACLE_PAYMENT = 0 * LINK_DIVISIBILITY / 100 * 5;
   uint256[] public array;
+
+  bytes32 private externalJobId;
+  uint256 private oraclePayment;
 
   constructor() ConfirmedOwner(msg.sender){
     setChainlinkToken(LINK_TOKEN_ADDRESS);
     setChainlinkOracle(OPERATOR_ADDRESS);
+    externalJobId = "externalJobId";
+    oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
   function requestArray()
     public
     onlyOwner
   {
-    bytes32 _jobId = "JOB_ID";
-    Chainlink.Request memory req = buildChainlinkRequest(_jobId, address(this), this.fulfillArray.selector);
+    Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillArray.selector);
     req.add("input", "input_variable");
-    sendOperatorRequest(req, ORACLE_PAYMENT);
+    sendOperatorRequest(req, oraclePayment);
   }
 
   event RequestFulfilledArray(
