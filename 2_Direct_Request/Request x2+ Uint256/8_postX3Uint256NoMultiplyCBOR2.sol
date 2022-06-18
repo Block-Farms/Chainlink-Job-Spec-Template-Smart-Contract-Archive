@@ -10,7 +10,9 @@ import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 contract MultiVariableRequest is ChainlinkClient, ConfirmedOwner {
   using Chainlink for Chainlink.Request;
 
-  uint256 constant private ORACLE_PAYMENT = 0 * LINK_DIVISIBILITY / 100 * 5;
+  bytes32 private externalJobId;
+  uint256 private oraclePayment;
+
   uint256 public Value3;
   uint256 public Value2;
   uint256 public Value1;
@@ -18,20 +20,21 @@ contract MultiVariableRequest is ChainlinkClient, ConfirmedOwner {
   constructor() ConfirmedOwner(msg.sender){
     setChainlinkToken(LINK_TOKEN_ADDRESS);
     setChainlinkOracle(OPERATOR_ADDRESS);
+    externalJobId = "externalJobId";
+    oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
   function requestValue1AndValue2()
     public
     onlyOwner
   {
-    bytes32 _jobId = "JOB_ID";
-    Chainlink.Request memory req = buildChainlinkRequest(_jobId, address(this), this.fulfillValue1AndValue2AndValue3.selector);
-    req.add("input1", "headerInput1Value");
-    req.add("input2", "headerInput2Value");
+    Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillValue1AndValue2AndValue3.selector);
+    req.add("input1", "inputVariable1");
+    req.add("input2", "inputVariable2");
     req.add("path1", "data,results1");
     req.add("path2", "data,results2");
     req.add("path3", "data,results2");
-    sendOperatorRequest(req, ORACLE_PAYMENT);
+    sendOperatorRequest(req, oraclePayment);
   }
 
   event RequestFulfilledValue1AndValue2(
