@@ -9,18 +9,20 @@ import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 contract MultiDataTypeRequest is ChainlinkClient {
   using Chainlink for Chainlink.Request;
 
-
   bytes public data;
   string public convertedString;
   uint256 public number1;
   uint256 public number2;
 
-  uint256 constant private ORACLE_PAYMENT = 0 * LINK_DIVISIBILITY / 100 * 5;
+  bytes32 private externalJobId;
+  uint256 private oraclePayment;
 
   constructor(
   ) {
     setChainlinkToken(LINK_TOKEN_ADDRESS);
     setChainlinkOracle(OPERATOR_ADDRESS);
+    externalJobId = "externalJobId";
+    oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
 
@@ -28,14 +30,14 @@ contract MultiDataTypeRequest is ChainlinkClient {
   )
     public
   {
-    bytes32 externalJobId = "job_id";
+
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillBytesAndUint.selector);
-    req.add("get", "API_endpoint_url");
+    req.add("get", "https://API_endpoint_url");
     req.add("path1", "data,path1");
     req.add("path2", "data,path2");
     req.add("path3", "data,path3");
     req.add("times", 100);
-    sendOperatorRequest(req, ORACLE_PAYMENT);
+    sendOperatorRequest(req, oraclePayment);
   }
 
   event RequestFulfilled(
