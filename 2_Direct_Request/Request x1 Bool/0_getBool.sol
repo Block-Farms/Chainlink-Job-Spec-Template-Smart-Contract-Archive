@@ -31,7 +31,7 @@ contract getBoolTemplate is ChainlinkClient, ConfirmedOwner {
     public
     onlyOwner
   {
-    Chainlink.Request memory req = buildChainlinkRequest(_jobId, address(this), this.fulfillBool.selector);
+    Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillBool.selector);
     req.add("get", "https://YOUR_API_ENDPOINT_URL");
     req.add("path", "data,results");
     sendChainlinkRequestTo(req, oraclePayment);
