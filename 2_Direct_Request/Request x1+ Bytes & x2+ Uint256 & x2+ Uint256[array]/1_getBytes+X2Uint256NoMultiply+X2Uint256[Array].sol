@@ -33,7 +33,7 @@ contract MultiDataTypeRequest is ChainlinkClient {
     public
   {
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillRequest.selector);
-    req.add("get", "API_endpoint_url");
+    req.add("get", "https://API_endpoint_url");
     req.add("path1", "data,path1");
     req.add("path2", "data,path2");
     req.add("path3", "data,path3");
