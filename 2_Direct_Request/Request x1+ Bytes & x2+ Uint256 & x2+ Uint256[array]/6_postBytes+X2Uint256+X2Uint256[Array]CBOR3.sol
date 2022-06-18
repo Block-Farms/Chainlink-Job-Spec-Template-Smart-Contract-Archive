@@ -16,12 +16,15 @@ contract MultiDataTypeRequest is ChainlinkClient {
   uint256[] public array1;
   uint256[] public array2;
 
-  uint256 constant private ORACLE_PAYMENT = 0 * LINK_DIVISIBILITY / 100 * 5;
+  bytes32 private externalJobId;
+  uint256 private oraclePayment;
 
   constructor(
   ) {
     setChainlinkToken(LINK_TOKEN_ADDRESS);
     setChainlinkOracle(OPERATOR_ADDRESS);
+    externalJobId = "externalJobId";
+    oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
 
@@ -29,18 +32,17 @@ contract MultiDataTypeRequest is ChainlinkClient {
   )
     public
   {
-    bytes32 externalJobId = "job_id";
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillRequest.selector);
-    req.add("input1", "headerInput1Value");
-    req.add("input2", "headerInput2Value");
-    req.add("input3", "headerInput3Value");
+    req.add("input1", "inputValue1");
+    req.add("input2", "inputValue2");
+    req.add("input3", "inputValue3");
     req.add("path1", "data,path1");
     req.add("path2", "data,path2");
     req.add("path3", "data,path3");
     req.add("path4", "data,path4");
     req.add("path5", "data,path5");
     req.add("times", 100);
-    sendOperatorRequest(req, ORACLE_PAYMENT);
+    sendOperatorRequest(req, oraclePayment);
   }
 
   event RequestFulfilled(
