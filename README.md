@@ -10,13 +10,15 @@ Chainlink nodes require jobs to do anything useful. For example, posting asset p
 
 (3) [Flux Monitor](https://docs.chain.link/docs/jobs/types/flux-monitor/)
 
-(4) [Off-chain Reporting (a.k.a. OCR)](https://docs.chain.link/docs/jobs/types/offchain-reporting/)
+(4) [Off-chain Reporting (OCR)](https://docs.chain.link/docs/jobs/types/offchain-reporting/)
 
 (5) [Cron](https://docs.chain.link/docs/jobs/types/cron/)
 
 (6) [Keeper](https://docs.chain.link/docs/jobs/types/keeper/)
 
-Jobs are represented by TOML `.toml` specifications.
+Job specs are represented by TOML `.toml` files.
+
+Requesting smart contracts are represented by solidity `.sol` files.
 
 ### References: 
 
