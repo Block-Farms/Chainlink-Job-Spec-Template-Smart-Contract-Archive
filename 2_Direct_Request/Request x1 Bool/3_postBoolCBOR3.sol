@@ -19,8 +19,8 @@ contract getBoolTemplate is ChainlinkClient, ConfirmedOwner {
   event RequestBoolFulfilled(bytes32 indexed requestId,bool indexed boolean);
 
   constructor() ConfirmedOwner(msg.sender){
-  setChainlinkToken(0xa36085F69e2889c224210F603D836748e7dC0088);
-  oracle = 0x7AE841fCD06a794537912749C5449b3290de780f;
+  setChainlinkToken(LINK_TOKEN_ADDRESS);
+  oracle = ORACLE_ADDRESS;
   externalJobId = "externalJobId";
   oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
