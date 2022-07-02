@@ -32,7 +32,7 @@ contract getUintTemplate is ChainlinkClient, ConfirmedOwner {
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillUint.selector);
     req.add("get", "https://YOUR_API_ENDPOINT_URL");
     req.add("path", "data,results");
-    req.add("times", 100);
+    req.addInt("times", 100);
     sendChainlinkRequestTo(oracle, req, oraclePayment);
   }
 
