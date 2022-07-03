@@ -16,10 +16,7 @@ contract PriceOracle is ChainlinkClient, ConfirmedOwner {
   uint256 private oraclePayment;
   address private oracle;
 
-  event RequestPriceFulfilled(
-    bytes32 indexed requestId,
-    uint256 indexed price
-  );
+  event RequestPriceFulfilled(bytes32 indexed requestId, uint256 indexed price);
 
   constructor() ConfirmedOwner(msg.sender){
     setChainlinkToken(LINK_TOKEN_ADDRESS);
