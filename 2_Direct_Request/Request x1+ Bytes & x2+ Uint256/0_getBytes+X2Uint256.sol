@@ -6,7 +6,7 @@ pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 
-contract MultiDataTypeRequest is ChainlinkClient {
+contract getMultiDataTypeTemplate is ChainlinkClient {
   using Chainlink for Chainlink.Request;
 
   bytes public data;
@@ -25,12 +25,10 @@ contract MultiDataTypeRequest is ChainlinkClient {
     oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
-
   function requestMultiVariable(
   )
     public
   {
-
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillBytesAndUint.selector);
     req.add("get", "https://API_endpoint_url");
     req.add("path1", "data,path1");
@@ -40,20 +38,9 @@ contract MultiDataTypeRequest is ChainlinkClient {
     sendOperatorRequest(req, oraclePayment);
   }
 
-  event RequestFulfilled(
-    bytes32 indexed requestId,
-    bytes indexed data,
-    uint256 number1,
-    uint256 number2
-  );
+  event RequestFulfilled(bytes32 indexed requestId, bytes indexed data, uint256 number1, uint256 number2);
 
-
-  function fulfillBytesAndUint(
-    bytes32 requestId,
-    bytes memory bytesData,
-    uint256 _number1,
-    uint256 _number2
-  )
+  function fulfillBytesAndUint(bytes32 requestId, bytes memory bytesData, uint256 _number1, uint256 _number2)
     public
     recordChainlinkFulfillment(requestId)
   {
