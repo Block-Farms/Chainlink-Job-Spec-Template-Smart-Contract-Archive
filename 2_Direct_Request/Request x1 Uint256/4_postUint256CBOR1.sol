@@ -7,7 +7,7 @@ pragma solidity ^0.8.7;
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 
-contract getUintTemplate is ChainlinkClient, ConfirmedOwner {
+contract postUintTemplate is ChainlinkClient, ConfirmedOwner {
   using Chainlink for Chainlink.Request;
 
   uint256 public Uint;
