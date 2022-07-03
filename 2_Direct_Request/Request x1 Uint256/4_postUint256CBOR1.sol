@@ -16,10 +16,7 @@ contract getUintTemplate is ChainlinkClient, ConfirmedOwner {
   uint256 private oraclePayment;
   address private oracle;
 
-  event RequestUintFulfilled(
-    bytes32 indexed requestId,
-    uint256 indexed Uint
-  );
+  event RequestUintFulfilled(bytes32 indexed requestId, uint256 indexed Uint);
 
   constructor() ConfirmedOwner(msg.sender){
     setChainlinkToken(LINK_TOKEN_ADDRESS);
