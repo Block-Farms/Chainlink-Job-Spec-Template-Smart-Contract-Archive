@@ -7,7 +7,7 @@ pragma solidity ^0.8.7;
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 
-contract GenericLargeResponse is ChainlinkClient {
+contract getBytesTemplate is ChainlinkClient {
   using Chainlink for Chainlink.Request;
 
   bytes public data;
@@ -34,15 +34,9 @@ contract GenericLargeResponse is ChainlinkClient {
     sendOperatorRequest(req, oraclePayment);
   }
 
-  event RequestFulfilled(
-    bytes32 indexed requestId,
-    bytes indexed data
-  );
+  event RequestFulfilled(bytes32 indexed requestId, bytes indexed data);
 
-  function fulfillBytes(
-    bytes32 requestId,
-    bytes memory bytesData
-  )
+  function fulfillBytes(bytes32 requestId, bytes memory bytesData)
     public
     recordChainlinkFulfillment(requestId)
   {
