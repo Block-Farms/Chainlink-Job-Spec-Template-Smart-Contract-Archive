@@ -19,7 +19,7 @@ contract MultiDataTypeRequest is ChainlinkClient {
   constructor(
   ) {
     setChainlinkToken(LINK_TOKEN_ADDRESS);
-    setChainlinkOracle(OPERATOR_ADDRESS);
+    setChainlinkOracle(ORACLE_ADDRESS);
     externalJobId = "externalJobId";
     oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
@@ -32,7 +32,7 @@ contract MultiDataTypeRequest is ChainlinkClient {
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillBytesAndUint.selector);
     req.add("path1", "data,results1");
     req.add("path2", "data,results2");
-    req.add("times", 100);
+    req.addInt("times", 100);
     sendOperatorRequest(req, oraclePayment);
   }
 
