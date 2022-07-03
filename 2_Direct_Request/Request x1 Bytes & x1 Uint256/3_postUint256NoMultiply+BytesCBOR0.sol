@@ -24,7 +24,6 @@ contract postMultiDataTypeTemplate is ChainlinkClient {
     oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
-
   function requestBytesAndUint(
   )
     public
