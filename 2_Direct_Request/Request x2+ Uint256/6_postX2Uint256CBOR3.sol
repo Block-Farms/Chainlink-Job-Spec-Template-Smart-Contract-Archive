@@ -7,7 +7,7 @@ pragma solidity ^0.8.7;
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 
-contract MultiVariableRequest is ChainlinkClient, ConfirmedOwner {
+contract postMultiVariableTemplate is ChainlinkClient, ConfirmedOwner {
   using Chainlink for Chainlink.Request;
 
   bytes32 private externalJobId;
@@ -37,17 +37,9 @@ contract MultiVariableRequest is ChainlinkClient, ConfirmedOwner {
     sendOperatorRequest(req, oraclePayment);
   }
 
-  event RequestFulfilledValue1AndValue2(
-    bytes32 indexed requestId,
-    uint256 indexed Value2,
-    uint256 indexed Value1
-  );
+  event RequestFulfilledValue1AndValue2(bytes32 indexed requestId, uint256 indexed Value2, uint256 indexed Value1);
 
-  function fulfillValue1AndValue2(
-    bytes32 requestId,
-    uint256 _Value2,
-    uint256 _Value1
-  )
+  function fulfillValue1AndValue2(bytes32 requestId, uint256 _Value2, uint256 _Value1)
     public
     recordChainlinkFulfillment(requestId)
   {
