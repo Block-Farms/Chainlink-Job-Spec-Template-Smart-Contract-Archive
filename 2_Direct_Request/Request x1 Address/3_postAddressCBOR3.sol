@@ -6,7 +6,7 @@ pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 
-contract getAddressTemplate is ChainlinkClient {
+contract postAddressTemplate is ChainlinkClient {
   using Chainlink for Chainlink.Request;
 
   address public addressVariable;
