@@ -6,7 +6,7 @@ pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 
-contract RequestString is ChainlinkClient {
+contract getStringTemplate is ChainlinkClient {
   using Chainlink for Chainlink.Request;
 
   string public stringVariable;
@@ -32,15 +32,9 @@ contract RequestString is ChainlinkClient {
     sendOperatorRequest(req, oraclePayment);
   }
 
-  event RequestFulfilled(
-    bytes32 indexed requestId,
-    string indexed stringVariable
-  );
+  event RequestFulfilled(bytes32 indexed requestId, string indexed stringVariable);
 
-  function fulfillString(
-    bytes32 requestId,
-    string calldata _stringVariable
-  )
+  function fulfillString(bytes32 requestId, string calldata _stringVariable)
     public
     recordChainlinkFulfillment(requestId)
   {
