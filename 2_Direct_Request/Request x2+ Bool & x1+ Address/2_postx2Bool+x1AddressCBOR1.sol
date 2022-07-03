@@ -45,8 +45,8 @@ contract MultiDataTypeRequest is ChainlinkClient {
 
   function fulfillboolsAndAddress(
     bytes32 requestId,
-    bool calldata _boolVariable1,
-    bool calldata _boolVariable2,
+    bool _boolVariable1,
+    bool _boolVariable2,
     address _walletAddress
   )
     public

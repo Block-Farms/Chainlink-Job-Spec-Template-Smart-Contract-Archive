@@ -14,15 +14,13 @@ contract getBoolTemplate is ChainlinkClient, ConfirmedOwner {
   
   bytes32 private externalJobId;
   uint256 private oraclePayment;
+  address private oracle;
 
-  event RequestBoolFulfilled(
-    bytes32 indexed requestId,
-    uint256 indexed boolean
-  );
+  event RequestBoolFulfilled(bytes32 indexed requestId,bool indexed boolean);
 
   constructor() ConfirmedOwner(msg.sender){
   setChainlinkToken(LINK_TOKEN_ADDRESS);
-  setChainlinkOracle(OPERATOR_ADDRESS);
+  oracle = ORACLE_ADDRESS;
   externalJobId = "externalJobId";
   oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
@@ -36,14 +34,14 @@ contract getBoolTemplate is ChainlinkClient, ConfirmedOwner {
     req.add("input2", "inputVariable2");
     req.add("input3", "inputVariable3");
     req.add("path", "data,results");
-    sendChainlinkRequestTo(req, oraclePayment);
+    sendChainlinkRequestTo(oracle, req, oraclePayment);
   }
 
   function fulfillBool(bytes32 _requestId, bool _boolean)
     public
     recordChainlinkFulfillment(_requestId)
   {
-    emit RequestUintFulfilled(_requestId, _boolean);
+    emit RequestBoolFulfilled(_requestId, _boolean);
     boolean = _boolean;
   }
 

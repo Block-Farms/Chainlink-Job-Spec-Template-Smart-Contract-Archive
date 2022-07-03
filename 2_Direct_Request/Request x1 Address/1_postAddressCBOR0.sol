@@ -6,7 +6,7 @@ pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 
-contract RequestAddress is ChainlinkClient {
+contract getAddressTemplate is ChainlinkClient {
   using Chainlink for Chainlink.Request;
 
   address public addressVariable;
@@ -17,13 +17,12 @@ contract RequestAddress is ChainlinkClient {
   constructor(
   ) {
     setChainlinkToken(LINK_TOKEN_ADDRESS);
-    setChainlinkOracle(OPERATOR_ADDRESS);
+    setChainlinkOracle(ORACLE_ADDRESS);
     externalJobId = "externalJobId";
     oraclePayment = (0.0 * LINK_DIVISIBILITY); // n * 10**18
   }
 
-  function RequestAddress(
-  )
+  function RequestAddress()
     public
   {
     Chainlink.Request memory req = buildChainlinkRequest(externalJobId, address(this), this.fulfillAddress.selector);
@@ -31,15 +30,9 @@ contract RequestAddress is ChainlinkClient {
     sendOperatorRequest(req, oraclePayment);
   }
 
-  event RequestFulfilled(
-    bytes32 indexed requestId,
-    address indexed addressVariable
-  );
+  event RequestFulfilled(bytes32 indexed requestId,address indexed addressVariable);
 
-  function fulfillAddress(
-    bytes32 requestId,
-    address calldata _addressVariable
-  )
+  function fulfillAddress(bytes32 requestId,address _addressVariable)
     public
     recordChainlinkFulfillment(requestId)
   {

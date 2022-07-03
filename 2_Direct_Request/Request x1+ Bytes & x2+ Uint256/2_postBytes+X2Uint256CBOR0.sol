@@ -35,7 +35,7 @@ contract MultiDataTypeRequest is ChainlinkClient {
     req.add("path1", "data,path1");
     req.add("path2", "data,path2");
     req.add("path3", "data,path3");
-    req.add("times", 100);
+    req.addInt("times", 100);
     sendOperatorRequest(req, oraclePayment);
   }
 

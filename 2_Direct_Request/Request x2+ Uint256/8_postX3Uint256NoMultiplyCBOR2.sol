@@ -41,7 +41,7 @@ contract MultiVariableRequest is ChainlinkClient, ConfirmedOwner {
     bytes32 indexed requestId,
     uint256 indexed Value3,
     uint256 indexed Value2,
-    uint256 indexed Value1
+    uint256 Value1
   );
 
   function fulfillValue1AndValue2AndValue3(

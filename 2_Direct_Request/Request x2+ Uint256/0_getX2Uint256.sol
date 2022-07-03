@@ -31,7 +31,7 @@ contract MultiVariableRequest is ChainlinkClient, ConfirmedOwner {
     req.add("get", "https://YOUR_API_ENDPOINT_URL");
     req.add("path1", "data,results1");
     req.add("path2", "data,results2");
-    req.add("times", 100);
+    req.addInt("times", 100);
     sendOperatorRequest(req, oraclePayment);
   }
 

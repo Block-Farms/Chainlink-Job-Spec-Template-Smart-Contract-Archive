@@ -7,7 +7,7 @@ pragma solidity ^0.8.7;
 import '@chainlink/contracts/src/v0.8/ChainlinkClient.sol';
 import '@chainlink/contracts/src/v0.8/ConfirmedOwner.sol';
 
-contract FetchFromArray is ChainlinkClient, ConfirmedOwner {
+contract getBytesTemplate is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
 
     bytes32 public bytesVariable;
@@ -31,7 +31,7 @@ contract FetchFromArray is ChainlinkClient, ConfirmedOwner {
         return sendChainlinkRequest(req, oraclePayment);
     }
 
-    function fulfill(bytes32 _requestId, bytes32 memory _bytesVariable) public recordChainlinkFulfillment(_requestId) {
+    function fulfill(bytes32 _requestId, bytes32 _bytesVariable) public recordChainlinkFulfillment(_requestId) {
         emit RequestBytes(_requestId, _bytesVariable);
         bytesVariable = _bytesVariable;
     }
