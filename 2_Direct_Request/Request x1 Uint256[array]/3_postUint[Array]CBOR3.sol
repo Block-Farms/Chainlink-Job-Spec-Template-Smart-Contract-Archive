@@ -12,7 +12,8 @@ contract RequestUint256Array is ChainlinkClient, ConfirmedOwner {
 
   uint256[] public array;
 
-
+  bytes32 private externalJobId;
+  uint256 private oraclePayment;
 
   constructor() ConfirmedOwner(msg.sender){
     setChainlinkToken(LINK_TOKEN_ADDRESS);
