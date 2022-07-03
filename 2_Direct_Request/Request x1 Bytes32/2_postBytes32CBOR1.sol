@@ -7,7 +7,7 @@ pragma solidity ^0.8.7;
 import '@chainlink/contracts/src/v0.8/ChainlinkClient.sol';
 import '@chainlink/contracts/src/v0.8/ConfirmedOwner.sol';
 
-contract getBytesTemplate is ChainlinkClient, ConfirmedOwner {
+contract postBytesTemplate is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
 
     bytes32 public bytesVariable;
