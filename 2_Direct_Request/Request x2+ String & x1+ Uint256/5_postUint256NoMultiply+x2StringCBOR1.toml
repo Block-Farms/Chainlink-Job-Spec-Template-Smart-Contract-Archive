@@ -1,6 +1,6 @@
 type = "directrequest"
 schemaVersion = 1
-name = "[DR-username] (Post > x2 String CBOR1, x1 Uint256) v0"
+name = "[DR-username] (Post > x2 String, x1 Uint256 No Multiply CBOR1) v0"
 maxTaskDuration = "0s"
 contractAddress = "YOUR_OPERATOR_CONTRACT_ADDRESS"
 minContractPaymentLinkJuels = 0
