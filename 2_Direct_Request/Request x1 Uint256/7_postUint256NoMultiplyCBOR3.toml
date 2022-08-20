@@ -13,7 +13,7 @@ observationSource = """
 
     decode_cbor  [type="cborparse" data="$(decode_log.data)"]
     fetch        [type=bridge name="bridge_name" requestData="{\\"id\\": $(jobSpec.externalJobID), \\"data\\": { \\"input1\\": $(decode_cbor.input1), \\"input2\\": $(decode_cbor.input2), \\"input3\\": $(decode_cbor.input3)}}"]
-    parse        [type=jsonparse path="$(path)" data="$(fetch)"]
+    parse        [type=jsonparse path="$(decode_cbor.path)" data="$(fetch)"]
     encode_data  [type="ethabiencode" abi="(uint256 value)" data="{ \\"value\\": $(parse) }"]
     encode_tx    [type="ethabiencode"
                   abi="fulfillOracleRequest(bytes32 requestId, uint256 payment, address callbackAddress, bytes4 callbackFunctionId, uint256 expiration, bytes32 data)"
