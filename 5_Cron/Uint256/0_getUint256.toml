@@ -1,6 +1,6 @@
 type = "cron"
 schemaVersion = 1
-name = "GET > uint256 (cron)"
+name = "[CRON] GET > uint256"
 schedule = "CRON_TZ=UTC @every 1m"
 observationSource = """
     // cron schedule above follows standard cron syntax
