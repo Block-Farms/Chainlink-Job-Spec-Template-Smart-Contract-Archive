@@ -1,6 +1,6 @@
 type = "cron"
 schemaVersion = 1
-name = "[CRON] GET > uint256"
+name = "[CRON] GET > Uint256"
 schedule = "CRON_TZ=UTC @every 1m"
 observationSource = """
     fetch           [type="http" method=GET url="https://min-api.cryptocompare.com/data/price?fsym=LINK&tsyms=USD"]
