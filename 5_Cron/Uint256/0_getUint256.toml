@@ -3,18 +3,12 @@ schemaVersion = 1
 name = "[CRON] GET > uint256"
 schedule = "CRON_TZ=UTC @every 1m"
 observationSource = """
-    // cron schedule above follows standard cron syntax
-
-    fetch    [type="http" method=GET url="https://min-api.cryptocompare.com/data/price?fsym=LINK&tsyms=USD"]
-    parse    [type="jsonparse" path="USD"]
-    multiply [type="multiply" times=100]
+    fetch           [type="http" method=GET url="https://min-api.cryptocompare.com/data/price?fsym=LINK&tsyms=USD"]
+    parse           [type="jsonparse" path="USD"]
+    multiply        [type="multiply" times=100]
     encode_response [type="ethabiencode" abi="(uint256 data)" data="{\\"data\\": $(multiply) }"]
-
-    // abi = <function name + parameters>
-    encode_tx [type="ethabiencode" abi="uintFunction(uint256 data)" data="{ \\"data\\": $(encode_response) }"]
-
-    // to: <contract address>
-    submit_tx  [type="ethtx" to="SMART_CONTRACT_ADDRESS" data="$(encode_tx)"]
+    encode_tx       [type="ethabiencode" abi="uintFunction(uint256 data)" data="{ \\"data\\": $(encode_response) }"]
+    submit_tx       [type="ethtx" to="SMART_CONTRACT_ADDRESS" data="$(encode_tx)"]
 
     fetch -> parse -> multiply -> encode_response -> encode_tx -> submit_tx
 """
